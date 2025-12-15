@@ -1,0 +1,61 @@
+
+primes.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	00000093          	li	ra,0
+   4:	7d000493          	li	s1,2000
+   8:	7d048493          	addi	s1,s1,2000
+   c:	7d048493          	addi	s1,s1,2000
+  10:	78048493          	addi	s1,s1,1920
+
+00000014 <init_loop_start>:
+  14:	0000a023          	sw	zero,0(ra)
+  18:	00108093          	addi	ra,ra,1
+  1c:	fe90cce3          	blt	ra,s1,14 <init_loop_start>
+  20:	00100093          	li	ra,1
+  24:	00102023          	sw	ra,0(zero) # 0 <_start>
+  28:	001020a3          	sw	ra,1(zero) # 1 <_start+0x1>
+  2c:	00000113          	li	sp,0
+  30:	0240006f          	j	54 <outer_loop_condition>
+
+00000034 <outer_loop_start>:
+  34:	00012203          	lw	tp,0(sp)
+  38:	00120c63          	beq	tp,ra,50 <outer_loop_increment>
+  3c:	002101b3          	add	gp,sp,sp
+  40:	00c0006f          	j	4c <inner_loop_condition>
+
+00000044 <inner_loop_start>:
+  44:	0011a023          	sw	ra,0(gp)
+  48:	002181b3          	add	gp,gp,sp
+
+0000004c <inner_loop_condition>:
+  4c:	fe91cce3          	blt	gp,s1,44 <inner_loop_start>
+
+00000050 <outer_loop_increment>:
+  50:	00110113          	addi	sp,sp,1
+
+00000054 <outer_loop_condition>:
+  54:	fe9140e3          	blt	sp,s1,34 <outer_loop_start>
+
+00000058 <done>:
+  58:	00000013          	nop
+  5c:	00000013          	nop
+  60:	00000013          	nop
+
+Disassembly of section .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	1941                	.insn	2, 0x1941
+   2:	0000                	.insn	2, 0x
+   4:	7200                	.insn	2, 0x7200
+   6:	7369                	.insn	2, 0x7369
+   8:	01007663          	bgeu	zero,a6,14 <.riscv.attributes+0x14>
+   c:	0000000f          	fence	unknown,unknown
+  10:	7205                	.insn	2, 0x7205
+  12:	3376                	.insn	2, 0x3376
+  14:	6932                	.insn	2, 0x6932
+  16:	7032                	.insn	2, 0x7032
+  18:	0031                	.insn	2, 0x0031

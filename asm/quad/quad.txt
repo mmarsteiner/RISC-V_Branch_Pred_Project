@@ -1,0 +1,50 @@
+
+quad.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	7ff00c93          	li	s9,2047
+   4:	00000413          	li	s0,0
+   8:	00c0006f          	j	14 <init_loop_condition>
+
+0000000c <init_loop>:
+   c:	00042023          	sw	zero,0(s0)
+  10:	00140413          	addi	s0,s0,1
+
+00000014 <init_loop_condition>:
+  14:	ff944ce3          	blt	s0,s9,c <init_loop>
+  18:	00000413          	li	s0,0
+  1c:	00100993          	li	s3,1
+  20:	0180006f          	j	38 <main_loop_condition>
+
+00000024 <main_loop_start>:
+  24:	00347493          	andi	s1,s0,3
+  28:	00000913          	li	s2,0
+  2c:	00049463          	bnez	s1,34 <main_loop_increment>
+  30:	01342023          	sw	s3,0(s0)
+
+00000034 <main_loop_increment>:
+  34:	00140413          	addi	s0,s0,1
+
+00000038 <main_loop_condition>:
+  38:	ff9446e3          	blt	s0,s9,24 <main_loop_start>
+  3c:	00000013          	nop
+  40:	00000013          	nop
+  44:	00000013          	nop
+
+Disassembly of section .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	1941                	.insn	2, 0x1941
+   2:	0000                	.insn	2, 0x
+   4:	7200                	.insn	2, 0x7200
+   6:	7369                	.insn	2, 0x7369
+   8:	01007663          	bgeu	zero,a6,14 <.riscv.attributes+0x14>
+   c:	0000000f          	fence	unknown,unknown
+  10:	7205                	.insn	2, 0x7205
+  12:	3376                	.insn	2, 0x3376
+  14:	6932                	.insn	2, 0x6932
+  16:	7032                	.insn	2, 0x7032
+  18:	0031                	.insn	2, 0x0031
