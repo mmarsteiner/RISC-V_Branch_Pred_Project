@@ -5,34 +5,35 @@ quad.elf:     file format elf32-littleriscv
 Disassembly of section .text:
 
 00000000 <_start>:
-   0:	7ff00c93          	li	s9,2047
-   4:	00000413          	li	s0,0
-   8:	00c0006f          	j	14 <init_loop_condition>
+   0:	00001cb7          	lui	s9,0x1
+   4:	770c8c93          	addi	s9,s9,1904 # 1770 <main_loop_condition+0x1734>
+   8:	00000413          	li	s0,0
+   c:	00c0006f          	j	18 <init_loop_condition>
 
-0000000c <init_loop>:
-   c:	00042023          	sw	zero,0(s0)
-  10:	00140413          	addi	s0,s0,1
+00000010 <init_loop>:
+  10:	00042023          	sw	zero,0(s0)
+  14:	00140413          	addi	s0,s0,1
 
-00000014 <init_loop_condition>:
-  14:	ff944ce3          	blt	s0,s9,c <init_loop>
-  18:	00000413          	li	s0,0
-  1c:	00100993          	li	s3,1
-  20:	0180006f          	j	38 <main_loop_condition>
+00000018 <init_loop_condition>:
+  18:	ff944ce3          	blt	s0,s9,10 <init_loop>
+  1c:	00000413          	li	s0,0
+  20:	00100993          	li	s3,1
+  24:	0180006f          	j	3c <main_loop_condition>
 
-00000024 <main_loop_start>:
-  24:	00347493          	andi	s1,s0,3
-  28:	00000913          	li	s2,0
-  2c:	00049463          	bnez	s1,34 <main_loop_increment>
-  30:	01342023          	sw	s3,0(s0)
+00000028 <main_loop_start>:
+  28:	00347493          	andi	s1,s0,3
+  2c:	00000913          	li	s2,0
+  30:	00049463          	bnez	s1,38 <main_loop_increment>
+  34:	01342023          	sw	s3,0(s0)
 
-00000034 <main_loop_increment>:
-  34:	00140413          	addi	s0,s0,1
+00000038 <main_loop_increment>:
+  38:	00140413          	addi	s0,s0,1
 
-00000038 <main_loop_condition>:
-  38:	ff9446e3          	blt	s0,s9,24 <main_loop_start>
-  3c:	00000013          	nop
+0000003c <main_loop_condition>:
+  3c:	ff9446e3          	blt	s0,s9,28 <main_loop_start>
   40:	00000013          	nop
   44:	00000013          	nop
+  48:	00000013          	nop
 
 Disassembly of section .riscv.attributes:
 

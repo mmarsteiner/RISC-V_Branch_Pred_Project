@@ -1,7 +1,7 @@
     .global _start
 
 _start: 
-    addi s9, zero, 2047
+    li s9, 6000
     addi s0, zero, 0
     j init_loop_condition
 init_loop:
